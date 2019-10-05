@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class CartController {
 
     @PostMapping(value = {"/user/products/add_to_cart"})
     public String addToCartButton(@AuthenticationPrincipal User user,
-                                  @RequestParam("id") Long id) {
+                                  @RequestParam("id") Long id, Model model) {
         Optional<Product> product = productService.getById(id);
         Optional<Cart> lastCartByUser = cartService.getLastCartByUser(user);
         if (lastCartByUser.isPresent()) {
@@ -43,16 +44,8 @@ public class CartController {
             list.add(product.get());
             Cart cart = new Cart(user, list);
             cartService.createCart(cart);
-            int count = cartService.getSizeOfACart(cart);
+            model.addAttribute("count",  cartService.getSizeOfACart(cart));
         }
         return "redirect:/user/products";
     }
-
-
-    /*@PostMapping(value = {"/user/products"})
-    public String getProductsInCartAmount(
-            @AuthenticationPrincipal User user,
-            @RequestParam("cart") Cart cart) {
-        return String.valueOf(cart.getSizeOfCart(cart));
-    }*/
 }

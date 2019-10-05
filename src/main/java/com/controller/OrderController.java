@@ -84,7 +84,7 @@ public class OrderController {
                                Model model) {
         Long orderIdByUser = orderService.getOrderIdByUser(user);
         Optional<Code> code = codeService.getCode(orderIdByUser);
-        if (code.equals(codeFromPage)) {
+        if (code.toString().equals(codeFromPage)) {
             model.addAttribute("success!");
             return "index";
         } else {

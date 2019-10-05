@@ -31,24 +31,25 @@
     }
 </style>
 <body>
-<h2 class="container"> List of all users</h2>
+<div class="container form">
+    <h2 class="container"> List of all users</h2>
 
-<a href="register"> Add new user</a> <br>
-<a href="products">List of all items</a> <br>
+    <a href="register"> Add new user</a> <br>
+    <a href="products">List of all items</a> <br>
 
 
-<form action="/signout" method="post">
-    <button type="submit">Logout</button>
-</form>
-
-<div class="btn-group" role="group" aria-label="...">
-    <button type="button" onclick="register" class="btn btn-default">Register</button>
-    <button type="button" class="btn btn-default">Middle</button>
-    <button type="button" class="btn btn-default">Right</button>
+    <form action="/signout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    <tbody>
+    <c:forEach var="product" items="${allProductsInCart}">
+        <tr>${product.id} </tr>
+    </c:forEach>
+    </tbody>
 </div>
 
 <div class="container">
-    <table class="table table-dark" border="1">
+    <table border="1">
         <thead>
         <th>Id</th>
         <th>Email</th>
@@ -65,7 +66,8 @@
                 <td>${user.password}</td>
                 <td>${user.role}</td>
                 <td>
-                    <button class="btn btn-success"><a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a></button>
+                    <button class="btn btn-success"><a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a>
+                    </button>
                 </td>
                 <td>
                     <form action="/admin/remove/user" method="post">

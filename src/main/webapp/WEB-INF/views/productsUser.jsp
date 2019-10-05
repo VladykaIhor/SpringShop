@@ -27,8 +27,14 @@
 <form class="container" action="/signout" method="post">
     <button class="btn btn-dark" type="submit">Logout</button>
 </form>
-<h1 class="container"> Here's the most recent product list : </h1>
+<h1 align="center"> Here's the most recent product list : </h1>
 <div class="container">
+
+    <form >
+        <h2 align="center"> There are ${}
+    </form>
+
+
     <table class="table table-sm">
         <thead>
         <tr>
