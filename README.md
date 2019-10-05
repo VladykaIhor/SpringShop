@@ -8,7 +8,8 @@
 * [Authors](#authors)
 
 # <a name="purpose"></a>Project purpose
-The main purpose is 
+A secured, account-based database relationship model, which is similar to the most of the popular internet shops models.
+Enjoy!
 <hr>
 
 <hr>
