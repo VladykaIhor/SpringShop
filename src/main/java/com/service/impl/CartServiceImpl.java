@@ -52,6 +52,6 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public int getSizeOfACart(Cart cart) {
-        return cart.getSizeOfCart(cart);
+        return cart.getSizeOfCart();
     }
 }

@@ -33,12 +33,12 @@ public class InitController {
             User user1 = new User("user", "yngwar95@gmail.com", "user", "ROLE_USER");
             userService.add(test);
             userService.add(user1);
+            productService.add(new Product("Guitar Pick", "1.25 mm", 5.0));
+            productService.add(new Product("Strings", "10-52", 280.0));
             return "redirect:/login";
         } else if ("ROLE_ADMIN".equals(user.getRole())) {
             return "redirect:/admin/users";
         } else {
-            productService.add(new Product("Guitar Pick", "1.25 mm", 5.0));
-            productService.add(new Product("Strings", "10-52", 280.0));
             return "redirect:/user/products";
         }
     }

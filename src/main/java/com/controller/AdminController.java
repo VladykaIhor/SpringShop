@@ -50,7 +50,7 @@ public class AdminController {
             model.addAttribute("Incorrect input", "Please enter valid values");
             return "/register";
         }
-        return "redirect:/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping(value = "/edit/user")

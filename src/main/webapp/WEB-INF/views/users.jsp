@@ -31,8 +31,8 @@
     }
 </style>
 <body>
-<div class="container form">
-    <h2 class="container"> List of all users</h2>
+<div class="container">
+    <h2> List of all users</h2>
 
     <a href="register"> Add new user</a> <br>
     <a href="products">List of all items</a> <br>

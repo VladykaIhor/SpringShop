@@ -30,11 +30,6 @@
 <h1 align="center"> Here's the most recent product list : </h1>
 <div class="container">
 
-    <form >
-        <h2 align="center"> There are ${}
-    </form>
-
-
     <table class="table table-sm">
         <thead>
         <tr>
@@ -43,23 +38,27 @@
             <th class="container">Price</th>
         </tr>
         </thead>
-        <c:forEach var="products" items="${products}">
         <tbody>
-        <tr>
-            <td align="center">${products.name}</td>
-            <td align="center">${products.description}</td>
-            <td align="center">${products.price}</td>
-            <td align="center">
-                <form action="/user/products/add_to_cart" method="post">
-                    <input type="hidden" name="id" value="${products.id}">
-                    <button class="list-group-item list-group-item-action" type="submit">To Cart</button>
-                </form>
-            </td>
-        </tr>
+        <c:forEach var="products" items="${products}">
+            <tr>
+                <td align="center">${products.name}</td>
+                <td align="center">${products.description}</td>
+                <td align="center">${products.price}</td>
+                <td align="center">
+                    <form action="/user/products/add_to_cart" method="post">
+                        <input type="hidden" name="id" value="${products.id}">
+                        <button class="list-group-item list-group-item-action" type="submit">To Cart</button>
+                    </form>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
-    <br>
+    <table>
+        <form>
+            <h2 align="center"> Here are the actual products in the shopping cart: ${cart.toString()}
+        </form>
+    </table>
     <form action="/user/orderConfirmation" method="post">
         <button class="btn btn-success" type="submit">Confirm Order</button>
     </form>
