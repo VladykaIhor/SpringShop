@@ -10,14 +10,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "order_table")
 
-public class Order {
+    public class Order {
 
-    @GeneratedValue
-    @Column(name = "id")
-    @Id
-    private Long id;
+        @GeneratedValue
+        @Column(name = "id")
+        @Id
+        private Long id;
 
-    @Column(name = "name")
+        @Column(name = "name")
     private String name;
 
     @Column(name = "surname")
@@ -25,15 +25,15 @@ public class Order {
 
 
     @Column(name = "email")
-    private String email;
+        private String email;
 
-    @Column(name = "country")
-    private String country;
+        @Column(name = "country")
+        private String country;
 
-    @Column(name = "state")
-    private String state;
+        @Column(name = "state")
+        private String state;
 
-    @Column(name = "city")
+        @Column(name = "city")
     private String city;
 
     @Column(name = "phoneNumber")

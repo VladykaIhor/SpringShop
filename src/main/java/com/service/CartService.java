@@ -19,4 +19,6 @@ public interface CartService {
     Optional<Cart> getLastCartByUser(User user);
 
     int getSizeOfACart(Cart cart);
+
+   // void removeFromCart(Long id);
 }

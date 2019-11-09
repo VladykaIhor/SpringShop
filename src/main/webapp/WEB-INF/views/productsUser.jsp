@@ -54,9 +54,29 @@
         </c:forEach>
         </tbody>
     </table>
-    <table>
+    <table class="table table-sm">
+        <h1>Products in your shopping cart :</h1>>
+        <thead>
+        <tr>
+            <th class="container">Name</th>
+            <th class="container">Description</th>
+            <th class="container">Price</th>
+        </tr>
+        </thead>
+
         <form>
-            <h2 align="center"> Here are the actual products in the shopping cart: ${cart.toString()}
+            <c:forEach var="cart" items="${cart}">
+                <tr>
+                <td align="center">${cart.name}</td>
+                <td align="center">${cart.description}</td>
+                <td align="center">${cart.price}</td>
+                   <td>
+                    <form action="/user/products/remove_from_cart" method="post">
+                        <input type="hidden" name="id" value="${cart}">
+                        <button class="list-group-item list-group-item-action" type="submit">Remove it</button>
+                    </form>
+                   </td>
+            </c:forEach>
         </form>
     </table>
     <form action="/user/orderConfirmation" method="post">

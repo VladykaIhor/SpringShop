@@ -7,18 +7,15 @@
 
 
 <div align="center">
-
-
     <form action="/admin/register" method="post">
         Login <input type="text" name="login" value=""> <br>
         E-mail <input type="email" name="email" value=""> <br>
         Password <input type="password" name="password"> <br>
         Confirm password <input type="password" name="repeatPassword"> <br>
-        Role <input type="radio" value="admin" name="role"> Admin<br>
-        <input type="radio" value="user" name="role"> User<br>
+        Role <input type="radio" value="ROLE_ADMIN" name="role"> Admin<br>
+        <input type="radio" value="ROLE_USER" name="role"> User<br>
         <input type="submit" value="Register">
     </form>
-
     <button type="submit" formaction="/users" formmethod="get">Back to all users list</button>
 </div>
 </body>

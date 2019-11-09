@@ -54,4 +54,9 @@ public class CartServiceImpl implements CartService {
     public int getSizeOfACart(Cart cart) {
         return cart.getSizeOfCart();
     }
+
+   // @Override
+    public void removeFromCart(Long id) {
+
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -80,7 +81,8 @@ public class ProductController {
     @GetMapping(path = {"/user/products"})
     public String getAllProductsPage(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("products", productService.getAll());
-        model.addAttribute("cart", cartService.getLastCartByUser(user));
+        model.addAttribute("cart", cartService.getLastCartByUser(user).isPresent() ?
+                cartService.getLastCartByUser(user).get().getProducts() : Collections.emptyList());
         return "productsUser";
     }
 }

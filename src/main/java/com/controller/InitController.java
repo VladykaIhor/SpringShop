@@ -29,12 +29,13 @@ public class InitController {
     @GetMapping("/")
     public String login(@AuthenticationPrincipal User user) {
         if (Objects.isNull(user)) {
-            User test = new User("test", "test@test", "test", "ROLE_ADMIN");
-            User user1 = new User("user", "yngwar95@gmail.com", "user", "ROLE_USER");
-            userService.add(test);
-            userService.add(user1);
+            userService.add(new User("test", "test@test", "test", "ROLE_ADMIN"));
+            userService.add(new User("user", "yngwar95@gmail.com", "user", "ROLE_USER"));
             productService.add(new Product("Guitar Pick", "1.25 mm", 5.0));
-            productService.add(new Product("Strings", "10-52", 280.0));
+            productService.add(new Product("Strings", "10-52", 28.0));
+            productService.add(new Product("Slide", "metal", 23.0));
+            productService.add(new Product("Marshall Amp", "large", 280.0));
+            productService.add(new Product("Bogner Uebershall", "metal", 666.0));
             return "redirect:/login";
         } else if ("ROLE_ADMIN".equals(user.getRole())) {
             return "redirect:/admin/users";
