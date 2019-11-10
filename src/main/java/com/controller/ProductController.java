@@ -68,13 +68,14 @@ public class ProductController {
         return "change_product";
     }
 
-    @PostMapping(path = {"/admin/products/update"})
-    public String updateProduct(@RequestParam("name") String name,
+    @PostMapping(path = {"/admin/products/edit"})
+    public String updateProduct(@RequestParam("id") Long id,
+                                @RequestParam("name") String name,
                                 @RequestParam("description") String description,
-                                @RequestParam("price") Double price,
-                                Model model) {
+                                @RequestParam("price") Double price) {
+        productService.delete(id);
         productService.update(new Product(name, description, price));
-        return "productsUser";
+        return "redirect:/admin/products";
     }
 
 

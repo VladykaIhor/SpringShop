@@ -3,9 +3,12 @@ package com.controller;
 import com.entity.User;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.PostRemove;
 
 @RequestMapping("/admin")
 @Controller
@@ -56,8 +59,20 @@ public class AdminController {
     @GetMapping(value = "/edit/user")
     public String getUserEditPage(@RequestParam("id") Long id, Model model) {
         model.addAttribute("id", id);
-        model.addAttribute("login", userService.getUserById(id).get().getLogin());
-        model.addAttribute("password", userService.getUserById(id).get().getPassword());
-        return "redirect:/change_user";
+        model.addAttribute("oldLogin", userService.getUserById(id).get().getLogin());
+        model.addAttribute("oldPassword", userService.getUserById(id).get().getPassword());
+        model.addAttribute("oldEmail", userService.getUserById(id).get().getEmail());
+        return "change_user";
+    }
+
+    @PostMapping(value = "/edit/user")
+    public String editUser(@RequestParam("id") Long id,
+                           @RequestParam("login") String login,
+                           @RequestParam("password") String password,
+                           @RequestParam("email") String email,
+                           @RequestParam("role") String role) {
+        userService.remove(id);
+        userService.add(new User(login, email, password, role));
+        return "redirect:/admin/users";
     }
 }

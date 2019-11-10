@@ -66,7 +66,8 @@
                 <td>${user.password}</td>
                 <td>${user.role}</td>
                 <td>
-                    <button class="btn btn-success"><a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a>
+                    <button class="btn btn-success">
+                        <a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a>
                     </button>
                 </td>
                 <td>

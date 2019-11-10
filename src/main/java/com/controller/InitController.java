@@ -37,10 +37,12 @@ public class InitController {
             productService.add(new Product("Marshall Amp", "large", 280.0));
             productService.add(new Product("Bogner Uebershall", "metal", 666.0));
             return "redirect:/login";
-        } else if ("ROLE_ADMIN".equals(user.getRole())) {
+        } else if (user.getRole().equals("ROLE_ADMIN")) {
             return "redirect:/admin/users";
-        } else {
+        } else if (user.getRole().equals("ROLE_USER")) {
             return "redirect:/user/products";
+        } else {
+            return "403";
         }
     }
 
