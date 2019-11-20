@@ -1,6 +1,5 @@
 package com.config;
 
-import com.entity.User;
 import com.service.UserService;
 import com.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
