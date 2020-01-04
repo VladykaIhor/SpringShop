@@ -1,13 +1,11 @@
 package com.service.impl;
 
 import com.entity.User;
-import com.repository.UserJpaRepository;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetailsServiceImpl(UserService userService) {
         this.userService = userService;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

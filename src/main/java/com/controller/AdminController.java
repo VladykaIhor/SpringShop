@@ -12,6 +12,7 @@ import javax.persistence.PostRemove;
 
 @RequestMapping("/admin")
 @Controller
+@SessionAttributes("user")
 public class AdminController {
 
     @Autowired
@@ -62,6 +63,7 @@ public class AdminController {
         model.addAttribute("oldLogin", userService.getUserById(id).get().getLogin());
         model.addAttribute("oldPassword", userService.getUserById(id).get().getPassword());
         model.addAttribute("oldEmail", userService.getUserById(id).get().getEmail());
+        model.addAttribute("role", userService.getUserById(id).get().getRole());
         return "change_user";
     }
 
@@ -74,5 +76,9 @@ public class AdminController {
         userService.remove(id);
         userService.add(new User(login, email, password, role));
         return "redirect:/admin/users";
+    }
+
+    public static void main(String[] args) {
+
     }
 }

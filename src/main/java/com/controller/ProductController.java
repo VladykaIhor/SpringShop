@@ -49,9 +49,9 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    @PostMapping(value = "/admin/products/remove")
+    @GetMapping(value = "/admin/products/remove")
     public String removeProductButton(@RequestParam("id") Long id) {
-        productService.delete(id);
+            productService.delete(id);
         return "redirect:/admin/products";
     }
 

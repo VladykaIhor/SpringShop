@@ -12,8 +12,8 @@
         Login: <input type="text" name="login" value="<%=request.getAttribute("oldLogin")%>"> <br>
         Password: <input type="text" name="password" value="<%=request.getAttribute("oldPassword")%>"> <br>
             Email: <input type="text" name="email" value="<%=request.getAttribute("oldEmail")%>"> <br>
-        Role <input type="radio" value="ROLE_ADMIN" name="role"> Admin<br>
-        <input type="radio" value="ROLE_USER" name="role"> User<br>
+        Role <input type="radio" value="ROLE_ADMIN" name="role" checked="<%=request.getAttribute("role") == "ROLE_ADMIN"%>"> Admin<br>
+        <input type="radio" value="ROLE_USER" name="role" checked="<%=request.getAttribute("role") == "ROLE_USER"%>"> User<br>
         <input type="submit" value="Edit User"></form>
     </form>
 </div>

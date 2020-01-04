@@ -32,11 +32,11 @@
 </style>
 <body>
 <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple online shop</p>
+    <h1 class="display-4">-- What's up, world? --</h1>
+    <p class="lead">That's a simple online shop, use it for your pleasure!</p>
 </div>
 <div class="container">
-    <form action="<spring:url value="/signin"/>" method="post">
+    <form action="<spring:url value="/login"/>" method="post">
         <label for="login"> Login </label>
         <input class="form-control" type="text" name="login" id="login" placeholder="Enter login">
         <label for="password">Password</label>

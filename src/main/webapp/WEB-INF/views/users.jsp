@@ -32,20 +32,17 @@
 </style>
 <body>
 <div class="container">
+
     <h2> List of all users</h2>
 
-    <a href="register"> Add new user</a> <br>
-    <a href="products">List of all items</a> <br>
+    <h3><a href="register"> Add new user</a></h3>
 
+    <h3><a href="products">List of all items</a></h3>
 
     <form action="/signout" method="post">
         <button type="submit">Logout</button>
     </form>
-    <tbody>
-    <c:forEach var="product" items="${allProductsInCart}">
-        <tr>${product.id} </tr>
-    </c:forEach>
-    </tbody>
+
 </div>
 
 <div class="container">

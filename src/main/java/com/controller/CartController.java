@@ -53,7 +53,6 @@ public class CartController {
     public String removeFromCartButton(@AuthenticationPrincipal User user,
                                        @RequestParam("id") Long id, Model model) {
         Optional<Cart> lastCartByUser = cartService.getLastCartByUser(user);
-
         List<Product> products = lastCartByUser.get().getProducts();
         model.addAttribute("productInTheCart", cartService.getLastCartByUser(user).get().
                 getProducts().get(Math.toIntExact(id)));
