@@ -20,5 +20,5 @@ public interface CartService {
 
     int getSizeOfACart(Cart cart);
 
-   // void removeFromCart(Long id);
+    void removeFromCart(Long id);
 }
