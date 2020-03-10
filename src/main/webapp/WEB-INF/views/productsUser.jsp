@@ -30,11 +30,6 @@
 <h1 align="center"> Here's the most recent product list : </h1>
 <div class="container">
 
-    <form >
-        <h2 align="center"> There are ${}
-    </form>
-
-
     <table class="table table-sm">
         <thead>
         <tr>
@@ -43,23 +38,47 @@
             <th class="container">Price</th>
         </tr>
         </thead>
-        <c:forEach var="products" items="${products}">
         <tbody>
-        <tr>
-            <td align="center">${products.name}</td>
-            <td align="center">${products.description}</td>
-            <td align="center">${products.price}</td>
-            <td align="center">
-                <form action="/user/products/add_to_cart" method="post">
-                    <input type="hidden" name="id" value="${products.id}">
-                    <button class="list-group-item list-group-item-action" type="submit">To Cart</button>
-                </form>
-            </td>
-        </tr>
+        <c:forEach var="products" items="${products}">
+            <tr>
+                <td align="center">${products.name}</td>
+                <td align="center">${products.description}</td>
+                <td align="center">${products.price}</td>
+                <td align="center">
+                    <form action="/user/products/add_to_cart" method="post">
+                        <input type="hidden" name="id" value="${products.id}">
+                        <button class="list-group-item list-group-item-action" type="submit">To Cart</button>
+                    </form>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
-    <br>
+    <table class="table table-sm">
+        <h1>Products in your shopping cart :</h1>>
+        <thead>
+        <tr>
+            <th class="container">Name</th>
+            <th class="container">Description</th>
+            <th class="container">Price</th>
+        </tr>
+        </thead>
+
+        <form>
+            <c:forEach var="cart" items="${cart}">
+                <tr>
+                <td align="center">${cart.name}</td>
+                <td align="center">${cart.description}</td>
+                <td align="center">${cart.price}</td>
+                   <td>
+                    <form action="/user/products/remove_from_cart" method="post">
+                        <input type="hidden" name="id" value="${cart}">
+                        <button class="list-group-item list-group-item-action" type="submit">Remove it</button>
+                    </form>
+                   </td>
+            </c:forEach>
+        </form>
+    </table>
     <form action="/user/orderConfirmation" method="post">
         <button class="btn btn-success" type="submit">Confirm Order</button>
     </form>

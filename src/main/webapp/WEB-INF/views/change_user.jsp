@@ -5,40 +5,17 @@
 <head>
     <title>Edit User</title>
 </head>
-
 <body>
-<h3>
-    ${incompleteFormError}
-</h3>
-
-<h3>
-    ${userIsAlreadyPresentError}
-</h3>
-
-<center>
-    <form action="admin/edit/user" method="post">
-        <table>
-            <tr>
-                <td>
-                    <input name="id" type="hidden" value="${id}">
-                </td>
-            </tr>
-            <tr>
-                <td>Login :</td>
-                <td><input name="login" type="text" value="${oldLogin}"></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input name="password" type="password" value="${oldPassword}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <button type="submit">Confirm</button>
-                </td>
-            </tr>
-        </table>
+<div style="text-align: center;">
+    <form action="/admin/edit/user" method="post">
+        <input type="hidden" name="id" value="<%=request.getAttribute("id")%>"> <br>
+        Login: <input type="text" name="login" value="<%=request.getAttribute("oldLogin")%>"> <br>
+        Password: <input type="text" name="password" value="<%=request.getAttribute("oldPassword")%>"> <br>
+            Email: <input type="text" name="email" value="<%=request.getAttribute("oldEmail")%>"> <br>
+        Role <input type="radio" value="ROLE_ADMIN" name="role" checked="<%=request.getAttribute("role") == "ROLE_ADMIN"%>"> Admin<br>
+        <input type="radio" value="ROLE_USER" name="role" checked="<%=request.getAttribute("role") == "ROLE_USER"%>"> User<br>
+        <input type="submit" value="Edit User"></form>
     </form>
-</center>
+</div>
 </body>
 </html>

@@ -31,21 +31,18 @@
     }
 </style>
 <body>
-<div class="container form">
-    <h2 class="container"> List of all users</h2>
+<div class="container">
 
-    <a href="register"> Add new user</a> <br>
-    <a href="products">List of all items</a> <br>
+    <h2> List of all users</h2>
 
+    <h3><a href="register"> Add new user</a></h3>
+
+    <h3><a href="products">List of all items</a></h3>
 
     <form action="/signout" method="post">
         <button type="submit">Logout</button>
     </form>
-    <tbody>
-    <c:forEach var="product" items="${allProductsInCart}">
-        <tr>${product.id} </tr>
-    </c:forEach>
-    </tbody>
+
 </div>
 
 <div class="container">
@@ -66,7 +63,8 @@
                 <td>${user.password}</td>
                 <td>${user.role}</td>
                 <td>
-                    <button class="btn btn-success"><a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a>
+                    <button class="btn btn-success">
+                        <a href="/admin/edit/user?id=${user.id}" name="edit"> Edit </a>
                     </button>
                 </td>
                 <td>

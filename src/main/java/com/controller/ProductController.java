@@ -1,15 +1,18 @@
 package com.controller;
 
 import com.entity.Product;
+import com.entity.User;
 import com.service.CartService;
 import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -46,9 +49,9 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    @PostMapping(value = "/admin/products/remove")
+    @GetMapping(value = "/admin/products/remove")
     public String removeProductButton(@RequestParam("id") Long id) {
-        productService.delete(id);
+            productService.delete(id);
         return "redirect:/admin/products";
     }
 
@@ -65,19 +68,22 @@ public class ProductController {
         return "change_product";
     }
 
-    @PostMapping(path = {"/admin/products/update"})
-    public String updateProduct(@RequestParam("name") String name,
+    @PostMapping(path = {"/admin/products/edit"})
+    public String updateProduct(@RequestParam("id") Long id,
+                                @RequestParam("name") String name,
                                 @RequestParam("description") String description,
-                                @RequestParam("price") Double price,
-                                Model model) {
+                                @RequestParam("price") Double price) {
+        productService.delete(id);
         productService.update(new Product(name, description, price));
-        return "productsUser";
+        return "redirect:/admin/products";
     }
 
 
     @GetMapping(path = {"/user/products"})
-    public String getAllProductsPage(Model model) {
+    public String getAllProductsPage(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("products", productService.getAll());
+        model.addAttribute("cart", cartService.getLastCartByUser(user).isPresent() ?
+                cartService.getLastCartByUser(user).get().getProducts() : Collections.emptyList());
         return "productsUser";
     }
 }

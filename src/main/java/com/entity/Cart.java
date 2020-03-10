@@ -55,8 +55,8 @@ public class Cart {
         this.products = products;
     }
 
-    public int getSizeOfCart(Cart cart) {
-        return cart.getProducts().size();
+    public int getSizeOfCart() {
+        return getProducts().size();
     }
 
     @Override
@@ -77,9 +77,7 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "id=" + id +
-                ", user=" + user +
-                ", products=" + products +
+                "products=" + products +
                 '}';
     }
 }

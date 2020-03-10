@@ -23,7 +23,6 @@ public class Order {
     @Column(name = "surname")
     private String surname;
 
-
     @Column(name = "email")
     private String email;
 

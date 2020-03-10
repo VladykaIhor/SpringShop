@@ -4,7 +4,7 @@
 <title> Products List </title>>
 <body>
 <div style="text-align: center; background-color: aqua">
-    <a href="index.jsp">Home </a>
+    <a href="index">Home </a>
     <center>
         <br>
         <form action="/signout" method="post">

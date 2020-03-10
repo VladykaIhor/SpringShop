@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.annotation.PostConstruct;
 import java.util.Objects;
 
 @Controller
@@ -29,17 +29,14 @@ public class InitController {
     @GetMapping("/")
     public String login(@AuthenticationPrincipal User user) {
         if (Objects.isNull(user)) {
-            User test = new User("test", "test@test", "test", "ROLE_ADMIN");
-            User user1 = new User("user", "yngwar95@gmail.com", "user", "ROLE_USER");
-            userService.add(test);
-            userService.add(user1);
+        //    initDefault();
             return "redirect:/login";
-        } else if ("ROLE_ADMIN".equals(user.getRole())) {
+        } else if (user.getRole().equals("ROLE_ADMIN")) {
             return "redirect:/admin/users";
-        } else {
-            productService.add(new Product("Guitar Pick", "1.25 mm", 5.0));
-            productService.add(new Product("Strings", "10-52", 280.0));
+        } else if (user.getRole().equals("ROLE_USER")) {
             return "redirect:/user/products";
+        } else {
+            return "403";
         }
     }
 
@@ -51,5 +48,16 @@ public class InitController {
     @GetMapping(path = {"/logout"})
     public String logout() {
         return "redirect:/";
+    }
+
+    @PostConstruct
+    public void initDefault() {
+        userService.add(new User("test", "test@test", "test", "ROLE_ADMIN"));
+        userService.add(new User("user", "yngwar95@gmail.com", "user", "ROLE_USER"));
+        productService.add(new Product("Guitar Pick", "1.25 mm", 5.0));
+        productService.add(new Product("Strings", "10-52", 28.0));
+        productService.add(new Product("Slide", "metal", 23.0));
+        productService.add(new Product("Marshall Amp", "large", 280.0));
+        productService.add(new Product("Bogner Uebershall", "metal", 666.0));
     }
 }

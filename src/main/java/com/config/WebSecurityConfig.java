@@ -1,6 +1,5 @@
 package com.config;
 
-import com.entity.User;
 import com.service.UserService;
 import com.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -18,8 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public WebSecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -36,22 +40,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/admin/*").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/*").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin()
                 .loginPage("/")
-                .loginProcessingUrl("/signin")
+                .loginProcessingUrl("/login")
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .successHandler((req, res, auth) -> {
                     res.sendRedirect("/");
                 })
                 .failureHandler((req, res, exp) -> {
-                    String error = "";
+                    String error = "BadCredentials!";
                     if (exp.getClass().isAssignableFrom(BadCredentialsException.class)) {
                         error = "Error login data.";
                     } else {
@@ -66,8 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler((req, res, auth) -> {
                     req.getSession().setAttribute("error", "Logout successful");
                     res.sendRedirect("/login");
-                })
-                .and()
-                .csrf().disable();
+                }).and().csrf().disable();
     }
 }

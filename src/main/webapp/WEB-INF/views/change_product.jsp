@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yngwa
-  Date: 10-Jul-19
-  Time: 5:32 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,7 +6,7 @@
 </head>
 <body>
 <div style="text-align: center; background-color: beige">
-    <form action="/admin/products/edit" method="post">
+    <form action="/admin/products/edit" method="post" th:th: object="product">
         <input type="hidden" name="id" value="<%=request.getAttribute("id")%>"> <br>
         Название <input type="text" name="name" value="<%= (request.getAttribute("oldName") == null) ? ""
                       : request.getAttribute("oldName")%>"> <br>

@@ -46,12 +46,18 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public Optional<Cart> getLastCartByUser(User user) {
-        return cartJpaRepository.findFirstByUserOrderByIdDesc(user);
+        return cartJpaRepository.findByUser(user);
     }
 
     @Transactional
     @Override
     public int getSizeOfACart(Cart cart) {
-        return cart.getSizeOfCart(cart);
+        return cart.getSizeOfCart();
+    }
+
+    @Transactional
+    @Override
+    public void removeFromCart(Long id) {
+        cartJpaRepository.removeByProductsContaining(id);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes({"user"})
@@ -44,8 +45,17 @@ public class CartController {
             list.add(product.get());
             Cart cart = new Cart(user, list);
             cartService.createCart(cart);
-            model.addAttribute("count",  cartService.getSizeOfACart(cart));
+            model.addAttribute("count", cartService.getSizeOfACart(cart));
         }
+        return "redirect:/user/products";
+    }
+
+    @PostMapping(value = {"/user/products/remove_from_cart"})
+    public String removeFromCartButton(@AuthenticationPrincipal User user,
+                                       @RequestParam("id") Long id, Model model) {
+        Optional<Cart> lastCartByUser = cartService.getLastCartByUser(user);
+        List<Product> products = productService.getAll().stream().filter(product -> product.getId() == id).collect(Collectors.toList());
+        model.addAttribute("productInTheCart", cartService.getLastCartByUser(user).get().getProducts());
         return "redirect:/user/products";
     }
 }
